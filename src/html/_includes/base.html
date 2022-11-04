@@ -1,0 +1,55 @@
+{% set titleText = metadata.siteTitle %}
+{% if condition %} {% set titleText = title + ' | ' + titleText %} {% endif %}
+<!DOCTYPE html>
+<html lang="{{ metadata.lang }}">
+
+<head>
+  <meta charset="{{ metadata.encoding }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{{ titleText }}</title>
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="description" content="{{ description or metadata.description or '' }}" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:type" content="{{ ogType or 'article' }}" />
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description or metadata.description or '' }}" />
+  <meta property="og:url" content="{{ metadata.siteUrl | urlJoin(page.url or canonical or '/') }}" />
+  <meta property="og:site_name" content="{{ metadata.site_name }}" />
+  {% if metadata.siteUrl -%}
+  <meta property="og:image"
+    content="{{ metadata.siteUrl|urlJoin(ogImage or metadata.ogImage or '/assets/images/ogp.png') }}" />
+  {%- endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+  {% if metadata.twitterSite -%}
+  <meta name="twitter:site" content="{{ metadata.twitterSite or '' }}" />
+  {%- endif -%}
+  <link rel="canonical" href="{{ metadata.siteUrl | urlJoin(page.url or canonical or '/') }}" />
+  {% if metadata.webFonts -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  {%- endif -%} {#
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="msapplication-TileImage" content="/assets/favicon-270.png" />
+  #} {%- for fontUrl in metadata.webFonts %}
+  <link rel="preload" as="style" href="{{ fontUrl }}" />
+  {%- endfor %}
+  <link rel="preload" as="style" href="{{ '/assets/css/main.css' | cacheBuster }}" />
+  {%- for fontUrl in metadata.webFonts %}
+  <link rel="stylesheet" href="{{ fontUrl }}" />
+  {%- endfor %}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | cacheBuster }}" />
+  <script type="module" src="{{ '/assets/js/main.js' | cacheBuster }}"></script>
+</head>
+
+<body>
+  <header class="g-header">header</header>
+  {{ content | safe }}
+  <footer class="g-footer">
+    <p class="small">&copy; copyright</p>
+  </footer>
+</body>
+
+</html>

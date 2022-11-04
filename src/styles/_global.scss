@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+html {
+  background-color: var(--color-base);
+  font-size: var(--root-font-size);
+  scrollbar-width: none !important;
+}
+
+body {
+  font-feature-settings: "pkna";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+  overflow-y: scroll;
+  color: var(--color-text);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  font-family: var(--font-family-base);
+  font-synthesis: none;
+  letter-spacing: var(--letter-space-base);
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
